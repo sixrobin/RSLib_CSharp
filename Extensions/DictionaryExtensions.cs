@@ -1,4 +1,4 @@
-﻿namespace RSLib.Extensions
+﻿namespace RSLib.CSharp.Extensions
 {
     using System.Collections.Generic;
 
