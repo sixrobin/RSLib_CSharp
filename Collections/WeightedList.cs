@@ -35,24 +35,32 @@
 		/// </summary>
 		/// <param name="value">Value to add.</param>
 		/// <param name="probability">The drop chance, that should not be less or equal to 0.</param>
-		public void Add(T value, float probability)
+		public bool Add(T value, float probability)
 		{
-            UnityEngine.Assertions.Assert.IsNotNull(value, "Can't add a null item.");
-            UnityEngine.Assertions.Assert.IsFalse(Contains(value), "Trying to add an item that is already in the list.");
-
+			if (value == null)
+				return false;
+			
+			if (Contains(value))
+				return false;
+				
 			_items.Add(new ProbableItem(value, probability));
+			return true;
 		}
 
 		/// <summary>
 		/// Searches for the item with a specified value in the list and removes it.
 		/// </summary>
 		/// <param name="value">The probable item's value.</param>
-		public void Remove(T value)
+		public bool Remove(T value)
 		{
-            UnityEngine.Assertions.Assert.IsNotNull(value, "Can't remove an item using a null reference.");
-            UnityEngine.Assertions.Assert.IsTrue(Contains(value), "Could not find a fitting item to remove.");
+			if (value == null)
+				return false;
+			
+			if (!Contains(value))
+				return false;
 
 			_items.Remove(_items.Find(o => o.Value.Equals(value)));
+			return true;
 		}
 
 		/// <summary>
