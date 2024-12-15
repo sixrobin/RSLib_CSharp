@@ -1,4 +1,4 @@
-﻿namespace RSLib.CSharp.FSM
+﻿namespace RSLib.CSharp.Framework.FSM
 {
     using System.Collections.Generic;
 
