@@ -21,8 +21,12 @@ List of all the types having their set of extension methods:
 - Stack
 - XDocument
 
-## FSM
-- Finite State Machine generic implementation, using any enum for state and transitions recognition.
+## Framework
+- Custom comparers.
+- CSV file parser.
+- Generic finite state machine.
+- Random number generator.
+- Topological sorter.
 
 ## Maths
 - Geometry utility functions.
