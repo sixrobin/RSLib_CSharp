@@ -263,7 +263,7 @@
 
                 return true;
             }
-            catch (System.Exception _)
+            catch (System.Exception)
             {
                 return false;
             }
