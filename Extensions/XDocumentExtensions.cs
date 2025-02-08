@@ -125,11 +125,17 @@
         /// <summary>
         /// Parses a XElement value to an enum value.
         /// </summary>
+        /// <param name="element">XElement to get the enum value from.</param>
+        /// <param name="valuePreprocessor">Function applied to XElement value before casting it to the given enum type.</param>
         /// <returns>Element value if parsing succeeded, else throws an exception.</returns>
-        public static T ValueToEnum<T>(this XElement element) where T : System.Enum
+        public static T ValueToEnum<T>(this XElement element, System.Func<string, string> valuePreprocessor = null) where T : System.Enum
         {
-            if (System.Enum.IsDefined(typeof(T), element.Value))
-                return (T)System.Enum.Parse(typeof(T), element.Value);
+            string value = element.Value;
+            if (valuePreprocessor != null)
+                value = valuePreprocessor.Invoke(element.Value);
+            
+            if (System.Enum.IsDefined(typeof(T), value))
+                return (T)System.Enum.Parse(typeof(T), value);
 
             throw new System.Exception($"Could not parse XElement {element.Name.LocalName} Value {element.Value} to a valid enum value.");
         }
@@ -137,11 +143,17 @@
         /// <summary>
         /// Parses a XAttribute value to an enum value.
         /// </summary>
+        /// <param name="attribute">XAttribute to get the enum value from.</param>
+        /// <param name="valuePreprocessor">Function applied to XAttribute value before casting it to the given enum type.</param>
         /// <returns>Element value if parsing succeeded, else throws an exception.</returns>
-        public static T ValueToEnum<T>(this XAttribute attribute) where T : System.Enum
+        public static T ValueToEnum<T>(this XAttribute attribute, System.Func<string, string> valuePreprocessor = null) where T : System.Enum
         {
-            if (System.Enum.IsDefined(typeof(T), attribute.Value))
-                return (T)System.Enum.Parse(typeof(T), attribute.Value);
+            string value = attribute.Value;
+            if (valuePreprocessor != null)
+                value = valuePreprocessor.Invoke(attribute.Value);
+            
+            if (System.Enum.IsDefined(typeof(T), value))
+                return (T)System.Enum.Parse(typeof(T), value);
 
             throw new System.Exception($"Could not parse XAttribute {attribute.Name.LocalName} Value {attribute.Value} to a valid enum value.");
         }
