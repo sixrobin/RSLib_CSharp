@@ -166,15 +166,11 @@
         {
             XAttribute minAttribute = element.Attribute("Min");
             if (minAttribute.IsNullOrEmpty())
-            {
                 return (-1, -1);
-            }
 
             XAttribute maxAttribute = element.Attribute("Max");
             if (maxAttribute.IsNullOrEmpty())
-            {
                 return (-1, -1);
-            }
 
             float min = minAttribute.ValueToFloat();
             float max = maxAttribute.ValueToFloat();
