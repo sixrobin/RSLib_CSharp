@@ -159,6 +159,25 @@
         }
 
         /// <summary>
+        /// Parses a XElement Min and Max attributes to an integer Tuple.
+        /// </summary>
+        /// <returns>Attributes values if parsing succeeded, else, each failed value will be 0.</returns>
+        public static (int min, int max) MinMaxAttributesToInts(this XElement element)
+        {
+            XAttribute minAttribute = element.Attribute("Min");
+            if (minAttribute.IsNullOrEmpty())
+                return (-1, -1);
+
+            XAttribute maxAttribute = element.Attribute("Max");
+            if (maxAttribute.IsNullOrEmpty())
+                return (-1, -1);
+
+            int min = minAttribute.ValueToInt();
+            int max = maxAttribute.ValueToInt();
+            return (min, max);
+        }
+        
+        /// <summary>
         /// Parses a XElement Min and Max attributes to a float Tuple.
         /// </summary>
         /// <returns>Attributes values if parsing succeeded, else, each failed value will be 0.</returns>
