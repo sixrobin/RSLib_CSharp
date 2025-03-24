@@ -10,7 +10,7 @@
         /// <returns>2D string array.</returns>
         public static string[,] SplitCSVGrid(string csvText)
         {
-            string[] lines = csvText.Split("\n"[0]);
+            string[] lines = csvText.Split("\r\n");
      
             // Finds the max width of row.
             int width = 0; 
