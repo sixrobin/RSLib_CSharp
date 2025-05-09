@@ -201,7 +201,11 @@
         {
             using (System.IO.MemoryStream memoryStream = new System.IO.MemoryStream())
             {
+                // TODO: Don't use BinaryFormatter (https://learn.microsoft.com/en-us/dotnet/core/compatibility/serialization/5.0/binaryformatter-serialization-obsolete)
+#pragma warning disable SYSLIB0011
                 new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter().Serialize(memoryStream, random);
+#pragma warning restore SYSLIB0011
+                
                 return memoryStream.ToArray();
             }
         }
@@ -255,7 +259,11 @@
                 {
                     using (System.IO.MemoryStream memoryStream = new System.IO.MemoryStream(generatorState.State))
                     {
+                        // TODO: Don't use BinaryFormatter (https://learn.microsoft.com/en-us/dotnet/core/compatibility/serialization/5.0/binaryformatter-serialization-obsolete)
+#pragma warning disable SYSLIB0011
                         System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+#pragma warning restore SYSLIB0011
+                        
                         System.Random deserializedRandom = formatter.Deserialize(memoryStream) as System.Random;
                         _randomsLibrary.Add(generatorState.Id, deserializedRandom);
                     }
