@@ -283,6 +283,36 @@
             intersection = new System.Tuple<float, float>(a1x + u * (a2x - a1x), a1y + u * (a2y - a1y));
             return true;
         }
+
+        /// <summary>
+        /// Computes the intersection point of a segment and a rect in 2D space.
+        /// </summary>
+        /// <param name="s1x">First segment first point x.</param>
+        /// <param name="s1y">First segment first point y.</param>
+        /// <param name="s2x">First segment second point.</param>
+        /// <param name="s2y">First segment second point.</param>
+        /// <param name="r1x">Rect top left corner x.</param>
+        /// <param name="r1y">Rect top left corner y.</param>
+        /// <param name="r2x">Rect bottom right corner x.</param>
+        /// <param name="r2y">Rect bottom right corner y.</param>
+        /// <param name="intersection">Intersection point (equal to (-1,-1) if there's no intersection).</param>
+        /// <returns>True if there is an intersection, else false.</returns>
+        public static bool ComputeSegmentRectIntersection(float s1x, float s1y, float s2x, float s2y, float r1x, float r1y, float r2x, float r2y, out System.Tuple<float, float> intersection)
+        {
+            if (ComputeSegmentsIntersection(s1x, s1y, s2x, s2y, r1x, r1y, r2x, r1y, out intersection)) // Top side.
+                return true;
+            
+            if (ComputeSegmentsIntersection(s1x, s1y, s2x, s2y, r1x, r2y, r2x, r2y, out intersection)) // Bottom side.
+                return true;
+            
+            if (ComputeSegmentsIntersection(s1x, s1y, s2x, s2y, r1x, r1y, r1x, r2y, out intersection)) // Left side.
+                return true;
+            
+            if (ComputeSegmentsIntersection(s1x, s1y, s2x, s2y, r2x, r1y, r2x, r2y, out intersection)) // Right side.
+                return true;
+            
+            return false;
+        }
         
         /// <summary>
         /// Checks if a point is left to an edge, using an algorithm explained here http://geomalgorithms.com/a03-_inclusion.html.
@@ -299,7 +329,6 @@
             float positionFactor = (by - ay) * (px - ax) - (py - ay) * (bx - ax);
             return positionFactor > 0f ? 1 : positionFactor < 0f ? -1 : 0;
         }
-        
         
         /// <summary>
         /// Computes a point winding number according to a given polygon.
