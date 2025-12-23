@@ -92,7 +92,7 @@
         /// </summary>
         /// <param name="dict">Dictionary to get a random key from.</param>
         /// <returns>Randomly selected key.</returns>
-        public static TKey GetRandomKey<TKey>(this Dictionary<TKey, int> dict)
+        public static TKey GetRandomKeyWeighted<TKey>(this Dictionary<TKey, int> dict)
         {
             int totalWeight = dict.Sum(kvp => kvp.Value);
             double randomWeight = new System.Random().NextDouble() * totalWeight;
@@ -113,7 +113,7 @@
         /// </summary>
         /// <param name="dict">Dictionary to get a random key from.</param>
         /// <returns>Randomly selected key.</returns>
-        public static TKey GetRandomKey<TKey>(this Dictionary<TKey, float> dict)
+        public static TKey GetRandomKeyWeighted<TKey>(this Dictionary<TKey, float> dict)
         {
             float totalWeight = dict.Sum(kvp => kvp.Value);
             double randomWeight = new System.Random().NextDouble() * totalWeight;
@@ -134,7 +134,7 @@
         /// </summary>
         /// <param name="dict">Dictionary to get a random key from.</param>
         /// <returns>Randomly selected key.</returns>
-        public static TKey GetRandomKey<TKey>(this Dictionary<TKey, double> dict)
+        public static TKey GetRandomKeyWeighted<TKey>(this Dictionary<TKey, double> dict)
         {
             double totalWeight = dict.Sum(kvp => kvp.Value);
             double randomWeight = new System.Random().NextDouble() * totalWeight;
