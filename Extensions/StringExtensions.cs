@@ -55,5 +55,25 @@ namespace RSLib.CSharp.Extensions
         
             return newText.ToString().ToLower();
         }
+        
+        /// <summary>
+        /// Returns a string copy with all of its diacritics removed.
+        /// </summary>
+        /// <param name="s">String to remove diacritics from.</param>
+        /// <returns>Converted string.</returns>
+        static public string RemoveDiacritics(this string s)
+        {
+            string normalizedString = s.Normalize(NormalizationForm.FormD);
+            StringBuilder stringBuilder = new(normalizedString.Length);
+
+            for (int i = 0; i < normalizedString.Length; i++)
+            {
+                char c = normalizedString[i];
+                if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) != System.Globalization.UnicodeCategory.NonSpacingMark)
+                    stringBuilder.Append(c);
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
     }
 }
