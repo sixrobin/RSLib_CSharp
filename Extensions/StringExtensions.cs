@@ -21,7 +21,7 @@ namespace RSLib.CSharp.Extensions
         
             for (int i = 1; i < s.Length; i++)
             {
-                if (char.IsUpper(s[i]))
+                if (char.IsUpper(s[i]) && !char.IsUpper(s[i - 1]))
                     newText.Append('_');
             
                 newText.Append(s[i]);
