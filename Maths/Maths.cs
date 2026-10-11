@@ -281,6 +281,18 @@
             return delta > 0f ? 2 : 1;
         }
 
+        /// <summary>
+        /// Computes the offset between two angles, remapped to the [-180,180] range.
+        /// </summary>
+        /// <param name="a">First angle.</param>
+        /// <param name="b">Second angle.</param>
+        /// <returns>Remapped angle difference.</returns>
+        public static float GetAngleDifference(float a, float b)
+        {
+            float diff = (b - a + 180f) % 360f - 180f;
+            return diff < -180f ? diff + 360f : diff;
+        }
+        
         #endregion // GENERAL
 
         #region REMAPPING/NORMALIZATION
